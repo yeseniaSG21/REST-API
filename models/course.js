@@ -1,8 +1,8 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
+const { Model } = require('sequelize');
 
 // Course Model
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
     class Course extends Model {}
     Course.init({
         title: {
