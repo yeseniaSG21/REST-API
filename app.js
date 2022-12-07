@@ -4,6 +4,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const { sequelize } = require('./models');
+const routes = require('./routes');
 
 // test database connection
 console.log('Testing the connection to the database...');

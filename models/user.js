@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
                     msg: 'A first name is required'
                 },
                 notEmpty: {
-                    msg: 'Please provide a firt name'
+                    msg: 'Please provide a first name'
                 }
             }
         },
