@@ -7,7 +7,6 @@ const { sequelize } = require('./models');
 
 // test database connection
 console.log('Testing the connection to the database...');
-
 (async () => {
   await sequelize.sync({ force: true });
 
