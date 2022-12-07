@@ -41,6 +41,7 @@ module.exports = (sequelize) => {
         }
     }, { sequelize });
 
+    // Model Association
     Course.associate = (models) => {
         Course.belongsTo(models.User, {
             as: 'user',
