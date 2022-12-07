@@ -4,11 +4,11 @@
     "dialect": "sqlite"
   },
   "test": {
-    "database": "fsjstd-restapi.db",
+    "database": "test.db",
     "dialect": "sqlite"
   },
   "production": {
-    "database": "fsjstd-restapi.db",
+    "database": "production.db",
     "dialect": "sqlite"
   }
 }
