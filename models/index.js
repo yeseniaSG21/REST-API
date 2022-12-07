@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { Sequelize, DataTypes } = require('sequelize');
 const basename = path.basename(__filename);
+const process = require('process');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
@@ -21,7 +22,8 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
+    console.info(`Importing database model from file: ${file}`);
+    const model = require(path.join(__dirname, 'models', file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
