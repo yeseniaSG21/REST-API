@@ -34,7 +34,7 @@ router.post('/users', asyncHandler(async (req, res) => {
             password = bcrypt.hashSync(password, 10);
         }
         await User.create(req.body);
-        res.status(201).header('Location' , '/').send()
+        res.status(201).location('/').send()
     } catch (error) {
         if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
             const errors = error.errors.map(err => err.message);
