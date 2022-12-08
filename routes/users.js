@@ -10,16 +10,13 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 
 // Return all properties and values for the currently authenticated User 
-router.get('/', authenticateUser, asyncHandler(async (req, res) => {
-    const { firstName, lastName, emailAddress } = req.currentUser;
-
-    res.status(200).json(
-        { firstName, lastName, emailAddress }
-    );
+router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
+    const user = req.currentUser;
+    res.status(200).json(user);
 }))
 
 // Route that creates a new user.
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/users', asyncHandler(async (req, res) => {
     try {
         if (req.body.password) {
             req.body.password = bcrypt.hashSync(req.body.password, 10);
