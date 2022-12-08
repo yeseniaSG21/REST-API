@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
     const user = req.currentUser;
     res.status(200).json(user);
-}))
+}));
 
 // Route that creates a new user.
 router.post('/users', asyncHandler(async (req, res) => {
