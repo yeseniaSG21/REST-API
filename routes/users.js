@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/', authenticateUser, asyncHandler(async (req, res) => {
     const { firstName, lastName, emailAddress } = req.currentUser;
 
-    res.json(
+    res.status(200).json(
         { firstName, lastName, emailAddress }
     );
 }))
