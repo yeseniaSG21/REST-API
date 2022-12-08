@@ -16,7 +16,7 @@ router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
 }));
 
 // Route that creates a new user.
-router.post('/users', asyncHandler(async (req, res) => {
+router.post('/users', authenticateUser, asyncHandler(async (req, res) => {
     try {
         if (req.body.password) {
             req.body.password = bcrypt.hashSync(req.body.password, 10);

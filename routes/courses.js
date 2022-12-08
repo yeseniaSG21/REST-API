@@ -22,6 +22,21 @@ router.get();
 
 
 // DELETE route that will delete the corresponding course and return a 204 HTTP status code and no content.
+router.delete("/courses/:id", authenticateUser, asyncHandler(async (req,res) => {
+    try {
+        const course = await Course.findByPk(req.params.id);
+        if (course) {
+            
+        }
+    } catch (error) {
+        console.log('Error: ', error.message);
+    }
+    
+    
+    
+    await records.deleteQuote(quote);
+    res.status(204).end();
+}));
 
 
-
+module.exports = router;
