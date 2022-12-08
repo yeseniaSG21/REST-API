@@ -30,16 +30,16 @@ router.post('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
     try {
         course = await Course.findByPk(req.params.id);
         if (course) {
-            await book.update(req.body);
+            await Course.update(req.body);
             res.redirect("/"); 
         } else {
             res.sendStatus(404);
         }
     } catch (error) {
         if (error.name === "SequelizeValidationError") {
-            book = await Book.build(req.body);
-            book.id = req.params.id;
-            res.render("books/update-book", { book, errors: error.errors, title: "Edit Book Entry" })
+            course = await Course.build(req.body);
+            course.id = req.params.id;
+            res.render("courses/update-course", { Course, errors: error.errors, title: "Edit course Entry" })
         } else {
             throw error;
         }
