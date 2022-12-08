@@ -10,8 +10,10 @@ const { authenticateUser } = require('./middleware/auth-user');
 const router = express.Router();
 
 // GET route that will return all courses including the User associated with each course and a 200 HTTP status code.
-router.get("/courses", authenticateUser, asyncHandler(async (req, res) => {
-
+router.get("/courses", asyncHandler(async (req, res) => {
+    const courses = await Course.findAll({
+        
+    })
 }));
 
 // GET route that will return the corresponding course including the User associated with that course and a 200 HTTP status code.

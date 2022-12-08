@@ -22,9 +22,16 @@ router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
 
 // Route that creates a new user.
 router.post('/users', asyncHandler(async (req, res) => {
+    // Store errors
+    const errors = [];
+
     try {
-        if (req.body.password) {
-            req.body.password = bcrypt.hashSync(req.body.password, 10);
+        // Validate that we have a `password` value.
+        let password = req.body.password;
+        if (password.length < 8 || password.length > 20) {
+            errors.push('Your password should be between 8 and 20 characters');
+        } else {
+            password = bcrypt.hashSync(password, 10);
         }
         await User.create(req.body);
         res.status(201).header('Location' , '/').send()
