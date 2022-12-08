@@ -12,8 +12,15 @@ const router = express.Router();
 // GET route that will return all courses including the User associated with each course and a 200 HTTP status code.
 router.get("/courses", asyncHandler(async (req, res) => {
     const courses = await Course.findAll({
-        
-    })
+        include: [
+            {
+                model: User,
+                as: 'user',
+                attributes: [ 'firstName', 'lastName', 'emailAddress' ],
+            }
+        ]
+    });
+    res.status(200).json(courses);
 }));
 
 // GET route that will return the corresponding course including the User associated with that course and a 200 HTTP status code.
