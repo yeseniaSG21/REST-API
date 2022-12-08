@@ -12,6 +12,7 @@ const router = express.Router();
 // GET route that will return all courses including the User associated with each course and a 200 HTTP status code.
 router.get("/courses", asyncHandler(async (req, res) => {
     const courses = await Course.findAll({
+        attributes: [ 'id', 'title', 'description', 'userId' ],
         include: [
             {
                 model: User,
@@ -24,8 +25,22 @@ router.get("/courses", asyncHandler(async (req, res) => {
 }));
 
 // GET route that will return the corresponding course including the User associated with that course and a 200 HTTP status code.
-router.get('/courses/:id', authenticateUser, asyncHandler(async (req, res) => { 
-
+router.get('/courses/:id', asyncHandler(async (req, res) => { 
+    const course = await Course.findByPk(req.params.id, {
+        attributes: [ 'id', 'title', 'description', 'userId' ],
+        include: [
+            {
+                model: User,
+                as: 'as',
+                attributes: [ 'firstName', 'lastName', 'emailAddress' ],
+            }
+        ]
+    });
+    if (course) {
+        res.status(200).json(course);
+    } else {
+        res.status(404).json({ message: 'Course with that id was not found.' });
+    }
 }));
 
 // POST route that will create a new course and return a 201 HTTP status code and no content.
