@@ -9,3 +9,19 @@ const { authenticateUser } = require('./middleware/auth-user');
 // Construct a router instance.
 const router = express.Router();
 
+// GET route that will return all courses including the User associated with each course and a 200 HTTP status code.
+
+
+// GET route that will return the corresponding course including the User associated with that course and a 200 HTTP status code.
+
+
+// POST route that will create a new course and return a 201 HTTP status code and no content.
+
+
+// PUT route that will update the corresponding course and return a 204 HTTP status code and no content.
+
+
+// DELETE route that will delete the corresponding course and return a 204 HTTP status code and no content.
+
+
+
