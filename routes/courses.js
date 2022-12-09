@@ -63,7 +63,7 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
         let course = await Course.findByPk(req.params.id);
         if (course) {
             if (course.userId == req.currentUser.id) {
-                await Course.update(req.body);
+                await course.update(req.body);
                 res.status(204).end(); 
             } else {
                 res.status(403).json({ message: 'Access not permitted.' });
