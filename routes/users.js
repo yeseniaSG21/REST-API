@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { asyncHandler } = require('./middleware/async-handler');
-const { User } = require('./models');
+const { User } = require('../models');
 const { authenticateUser } = require('./middleware/auth-user');
 const bcrypt = require('bcrypt');
 
