@@ -12,7 +12,12 @@ const router = express.Router();
 // Return all properties and values for the currently authenticated User 
 router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
     const user = req.currentUser;
-    res.status(200).json(user);
+    res.status(200).json({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        emailAddress: user.emailAddress,
+    });
 }));
 
 // Route that creates a new user.
