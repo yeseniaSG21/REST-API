@@ -4,7 +4,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const { sequelize } = require('./models');
-const routes = require('./routes');
+const users = require('./routes/users');
+const courses = require('./routes/courses');
 
 // Test database connection
 console.log('Testing the connection to the database...');
@@ -39,7 +40,8 @@ app.get('/', (req, res) => {
 });
 
 // Add routes.
-app.use('/api', routes);
+app.use('/api/users', users);
+app.use('/api/courses', courses);
 
 // Send 404 if no other route matched
 app.use((req, res) => {
