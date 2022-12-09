@@ -35,10 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         materialsNeeded: {
             type: DataTypes.STRING
-        },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
         }
     }, { sequelize });
 
