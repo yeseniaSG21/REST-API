@@ -66,7 +66,7 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
             await Course.update(req.body);
             res.status(204).end(); 
         } else {
-            res.sendStatus(404).json({ message: "Course Not Found." });
+            res.sendStatus(404).json({ message: 'Course Not Found.' });
         }
     } catch (error) {
         if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
@@ -79,20 +79,22 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
 }));
 
 // DELETE route that will delete the corresponding course and return a 204 HTTP status code and no content.
-router.delete("/courses/:id", authenticateUser, asyncHandler(async (req,res) => {
+router.delete('/courses/:id', authenticateUser, asyncHandler(async (req,res) => {
     try {
         const course = await Course.findByPk(req.params.id);
         if (course) {
-
+            if (course.userId == req.currentUser.id) {
+                await course.destroy();
+                res.status(204).end();
+            } else {
+                res.status(403).json({ message: 'Access not permitted.' });
+            }
+        } else {
+            res.status(404).json({ message: 'Course not found' });
         }
     } catch (error) {
         console.log('Error: ', error.message);
     }
-    
-    
-    
-    await records.deleteQuote(quote);
-    res.status(204).end();
 }));
 
 module.exports = router;
