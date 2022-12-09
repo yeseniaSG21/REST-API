@@ -17,11 +17,12 @@ Next, populate the database:
 ```bash
   npm run seed
 ```
-Lastly, start the application:
+Lastly, launch the application:
 
 ```bash
   npm start
 ```
+* Open http://localhost:5000/ to browse the app. You should see a “Welcome to the REST API project!” message.
 
 ## Next Steps:
 In a next project, I will expand this project by using React to create a front-end client that uses this REST API as a part of a full-stack JavaScript application.
