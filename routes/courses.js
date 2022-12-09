@@ -30,7 +30,7 @@ router.get('/courses/:id', asyncHandler(async (req, res) => {
         include: [
             {
                 model: User,
-                as: 'as',
+                as: 'user',
                 attributes: [ 'firstName', 'lastName', 'emailAddress' ],
             }
         ]
