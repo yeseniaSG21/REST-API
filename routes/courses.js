@@ -62,14 +62,14 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
     try {
         let course = await Course.findByPk(req.params.id);
         if (course) {
-            if (course.userId == req.currentUser.id) {
+            if (course.userId === req.currentUser.id) {
                 await course.update(req.body);
                 res.status(204).end(); 
             } else {
                 res.status(403).json({ message: 'Access not permitted.' });
             }
         } else {
-            res.sendStatus(404).json({ message: 'Course Not Found.' });
+            res.status(404).json({ message: 'Course Not Found.' });
         }
     } catch (error) {
         if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
