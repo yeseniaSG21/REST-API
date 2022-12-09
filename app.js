@@ -40,8 +40,8 @@ app.get('/', (req, res) => {
 });
 
 // Add routes.
-app.use('/api/users', users);
-app.use('/api/courses', courses);
+app.use('/api', users);
+app.use('/api', courses);
 
 // Send 404 if no other route matched
 app.use((req, res) => {
