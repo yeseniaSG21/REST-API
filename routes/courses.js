@@ -59,21 +59,19 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res) => {
 }));
 
 // PUT route that will update the corresponding course and return a 204 HTTP status code and no content.
-router.post('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
-    let course;
+router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
     try {
-        course = await Course.findByPk(req.params.id);
+        let course = await Course.findByPk(req.params.id);
         if (course) {
             await Course.update(req.body);
-            res.redirect("/"); 
+            res.status(204).end(); 
         } else {
-            res.sendStatus(404);
+            res.sendStatus(404).json({ message: "Course Not Found." });
         }
     } catch (error) {
-        if (error.name === "SequelizeValidationError") {
-            course = await Course.build(req.body);
-            course.id = req.params.id;
-            res.render("courses/update-course", { Course, errors: error.errors, title: "Edit course Entry" })
+        if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
+            const errors = error.errors.map(err => err.message);
+            res.status(400).json({ errors });   
         } else {
             throw error;
         }
