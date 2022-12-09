@@ -10,7 +10,7 @@ const courses = require('./routes/courses');
 // Test database connection
 console.log('Testing the connection to the database...');
 (async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync();
 
   try {
       await sequelize.authenticate();
